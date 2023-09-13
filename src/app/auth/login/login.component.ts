@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup
   authService: AuthService = inject(AuthService);
-constructor(public loginFormBuilder: FormBuilder){
+constructor(public loginFormBuilder: FormBuilder, private router: Router){
 
 }
 
@@ -26,5 +27,6 @@ get loginFormControls(){
 }
 onSubmit(){
   this.authService.loginUser(this.loginForm.value).subscribe(res=>console.log("res data: ", res))
+  this.router.navigate(['./dashboard/products']);
 }
 }
