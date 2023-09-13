@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup
+  authService: AuthService = inject(AuthService);
 constructor(public loginFormBuilder: FormBuilder){
 
 }
@@ -23,6 +25,6 @@ get loginFormControls(){
   return this.loginForm.controls
 }
 onSubmit(){
-  console.log("data: ", this.loginForm.value)
+  this.authService.loginUser(this.loginForm.value).subscribe(res=>console.log("res data: ", res))
 }
 }
