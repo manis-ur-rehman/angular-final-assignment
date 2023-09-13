@@ -6,17 +6,53 @@
           <h2 class="p-3">Login</h2>
         </div>
         <div class="card-body">
-          <form>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="mb-4">
               <label for="email" class="form-label">Email</label>
-              <input type="text" class="form-control" id="email" />
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                placeholder="Email"
+              />
+              <ng-container
+                *ngIf="
+                  loginFormControls['email'].invalid &&
+                  (loginFormControls['email'].dirty ||
+                    loginFormControls['email'].touched)
+                "
+              >
+                <span
+                  *ngIf="loginFormControls['email'].errors?.['required']"
+                  class="text-danger"
+                >
+                  Email is required
+                </span>
+                <span
+                  *ngIf="loginFormControls['email'].errors?.['pattern']"
+                  class="text-danger"
+                >
+                  Email is not validate
+                </span>
+              </ng-container>
             </div>
             <div class="mb-4">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" />
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="password"
+                placeholder="Password"
+              />
             </div>
             <div class="d-grid">
-              <button type="submit" class="btn text-light main-bg">
+              <button
+                type="submit"
+                class="btn text-light main-bg"
+                [disabled]="loginForm.invalid"
+              >
                 Login
               </button>
             </div>
