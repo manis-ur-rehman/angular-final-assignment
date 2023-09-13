@@ -10,6 +10,21 @@ export class AuthService {
 
   constructor(public http: HttpClient) { }
 
+  public saveUserToken(key: string, value: string) {
+    localStorage.setItem(key, value);
+  }
+
+  public getUserToken(key: string) {
+    return localStorage.getItem(key)
+  }
+  public removeUserToken(key: string) {
+    localStorage.removeItem(key);
+  }
+
+  public clearUserToken() {
+    localStorage.clear();
+  }
+
 loginUser(data: any){
   return this.http.post(`${environment.apiUrl}${environment.route}${environment.version}/auth/login`, data)
 }

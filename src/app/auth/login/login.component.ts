@@ -26,7 +26,9 @@ get loginFormControls(){
   return this.loginForm.controls
 }
 onSubmit(){
-  this.authService.loginUser(this.loginForm.value).subscribe(res=>console.log("res data: ", res))
-  this.router.navigate(['./dashboard/products']);
+  this.authService.loginUser(this.loginForm.value).subscribe((res:any)=>{
+    this.authService.saveUserToken('token', res.access_token);
+    this.router.navigate(['./dashboard/products']);
+  })
 }
 }

@@ -1,3 +1,55 @@
 <app-layout>
-  <h1>Products</h1>
+  <div class="container">
+    <div class="card-group" *ngFor="let item of allProductList">
+      <div class="card bg-transparent" style="width: 25rem">
+        <div class="row">
+          <div
+            *ngFor="let image of item.images"
+            class="col-lg-4 col-md-12 mb-4 mb-lg-0"
+          >
+            <img
+              [src]="image"
+              class="w-100 shadow-1-strong rounded mb-4"
+              alt="Boat on Calm Water"
+            />
+          </div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title text-center">{{ item.title }}</h5>
+          <p class="card-text text-center">{{ item.description }}</p>
+          <div class="text-center">
+            <button type="button" class="btn btn-primary rounded">
+              Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-5"></div>
+    <div *ngIf="allProductList.length" class="d-flex justify-content-end">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <span class="page-link" (click)="getProductDataPrevious(offset)"
+              >Previous</span
+            >
+          </li>
+          <li class="page-item">
+            <span class="page-link" (click)="getProductDataByList(1)">1</span>
+          </li>
+          <li class="page-item">
+            <span class="page-link" (click)="getProductDataByList(2)">2</span>
+          </li>
+          <li class="page-item">
+            <span class="page-link" (click)="getProductDataByList(3)">3</span>
+          </li>
+          <li class="page-item">
+            <span class="page-link" (click)="getProductDataNext(offset)"
+              >Next</span
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </app-layout>

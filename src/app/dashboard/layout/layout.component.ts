@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -6,5 +7,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent {
-// @Input() com: 
+  authService: AuthService = inject(AuthService);
+
+  handleLogout(){
+this.authService.removeUserToken('token');
+  }
 }
