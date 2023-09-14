@@ -1,1 +1,134 @@
-<p>register works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mt-5 text-center">Product App</h1>
+      <p class="mt-3 text-center">Please Register to create Account</p>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-5">
+    <div class="col-lg-4 col-md-6 col-sm-6">
+      <div class="card shadow rounded">
+        <div class="card-title text-center border-bottom">
+          <h2 class="p-3">Register</h2>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="d-flex justify-content-center">
+              <img
+                [src]="imageSrc || '../../../assets//icons/user-icon.png'"
+                alt="Avatar"
+                class="round-image-class rounded-circle"
+              />
+            </div>
+            <div class="text-center mt-1">
+              <label for="avatar" class="form-label text-center d-block">
+                <svg
+                  height="30"
+                  viewBox="0 0 1792 1792"
+                  width="30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1344 1472q0-26-19-45t-45-19-45 19-19 45 19 45 45 19 45-19 19-45zm256 0q0-26-19-45t-45-19-45 19-19 45 19 45 45 19 45-19 19-45zm128-224v320q0 40-28 68t-68 28h-1472q-40 0-68-28t-28-68v-320q0-40 28-68t68-28h427q21 56 70.5 92t110.5 36h256q61 0 110.5-36t70.5-92h427q40 0 68 28t28 68zm-325-648q-17 40-59 40h-256v448q0 26-19 45t-45 19h-256q-26 0-45-19t-19-45v-448h-256q-42 0-59-40-17-39 14-69l448-448q18-19 45-19t45 19l448 448q31 30 14 69z"
+                  />
+                </svg>
+              </label>
+              <span *ngIf="!imageSrc" class="text-danger">
+                Avatar is required
+              </span>
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              class="form-control"
+              id="avatar"
+              (change)="loadFile($event)"
+              style="display: none"
+            />
+            <div class="mb-4">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="name"
+                placeholder="name"
+              />
+              <ng-container
+                *ngIf="
+                  registerFormControls['name'].invalid &&
+                  (registerFormControls['name'].dirty ||
+                    registerFormControls['name'].touched)
+                "
+              >
+                <span
+                  *ngIf="registerFormControls['name'].errors?.['required']"
+                  class="text-danger"
+                >
+                  Name is required
+                </span>
+              </ng-container>
+            </div>
+            <div class="mb-4">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                placeholder="Email"
+              />
+              <ng-container
+                *ngIf="
+                  registerFormControls['email'].invalid &&
+                  (registerFormControls['email'].dirty ||
+                    registerFormControls['email'].touched)
+                "
+              >
+                <span
+                  *ngIf="registerFormControls['email'].errors?.['required']"
+                  class="text-danger"
+                >
+                  Email is required
+                </span>
+              </ng-container>
+            </div>
+            <div class="mb-4">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="password"
+                placeholder="Password"
+              />
+              <ng-container
+                *ngIf="
+                  registerFormControls['password'].invalid &&
+                  (registerFormControls['password'].dirty ||
+                    registerFormControls['password'].touched)
+                "
+              >
+                <span
+                  *ngIf="registerFormControls['password'].errors?.['required']"
+                  class="text-danger"
+                >
+                  Password is required
+                </span>
+              </ng-container>
+            </div>
+            <div class="d-grid">
+              <button
+                type="submit"
+                class="btn text-light bg-primary rounded"
+                [disabled]="registerForm.invalid"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

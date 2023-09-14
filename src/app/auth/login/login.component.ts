@@ -31,4 +31,7 @@ onSubmit(){
     this.router.navigate(['./dashboard/products']);
   })
 }
+toRegisterRoute(){
+  this.router.navigate(['/register'])
+}
 }
