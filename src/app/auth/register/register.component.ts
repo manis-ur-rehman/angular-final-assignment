@@ -35,6 +35,10 @@ return this.registerForm.controls
 
 loadFile(event: any){
   this.loading = true;
+  this.error = {
+    statusCode: '',
+    message: ''
+  }
   const reader = new FileReader();
   if(event.target.files && event.target.files.length) {
     const [file] = event.target.files;
@@ -60,6 +64,10 @@ loadFile(event: any){
 }
 onSubmit(){
   this.loading = true;
+  this.error = {
+    statusCode: '',
+    message: ''
+  }
 this.authService.registerUser(this.registerForm.value).subscribe((data: RegisterResponse)=>{
   this.loading = false;
   this.router.navigate(['/login']);

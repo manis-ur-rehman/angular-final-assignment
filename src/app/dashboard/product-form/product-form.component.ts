@@ -30,6 +30,7 @@ ngOnInit() {
   this.productionService.categoryList().subscribe((successData: Array<Category>)=>{
     this.categoryList = successData;
   }, (error: ErrorType)=>{
+    this.errorHandler.emit(error);
   })
   this.productForm = this.productFormBuilder.group({
     title: new FormControl<string>('', [Validators.required]),
@@ -39,6 +40,7 @@ ngOnInit() {
     images: new FormControl<Array<string>>(['https://placeimg.com/640/480/any'])
   })
   if(this.id && this.isEdit){
+    this.loadingHandler.emit(true);
     this.productFormControls['description'].disable();
     this.productFormControls['categoryId'].disable();
     this.productionService.getProductById(Number(this.id)).subscribe((successData: ProductResponse)=>{
@@ -49,7 +51,10 @@ ngOnInit() {
         categoryId: successData.category.id,
         images: successData.images,
       })
+      this.loadingHandler.emit(false);
     }, (error: ErrorType)=>{
+      this.loadingHandler.emit(false);
+      this.errorHandler.emit(error);
     })
   }
 }
