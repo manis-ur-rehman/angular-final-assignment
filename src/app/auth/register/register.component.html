@@ -2,6 +2,7 @@
   description="Please Register to create Account"
   title="Register"
   [error]="error"
+  [loading]="loading"
 >
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="d-flex justify-content-center">

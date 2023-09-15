@@ -1,5 +1,10 @@
 <app-layout>
   <div class="container">
+    <div class="d-flex justify-content-end mb-5">
+      <button class="btn btn-primary rounded" (click)="navigateToAddProduct()">
+        Add Product
+      </button>
+    </div>
     <div class="card-group" *ngFor="let item of allProductList">
       <div class="card bg-transparent" style="width: 25rem">
         <div class="row">

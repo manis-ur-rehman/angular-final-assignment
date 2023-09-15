@@ -8,6 +8,7 @@ import { ErrorType } from 'types';
 })
 export class FormLayoutComponent {
   @Input() title!:string;
-  @Input() description!:string
-  @Input() error!: ErrorType
+  @Input() description!:string;
+  @Input() error!: ErrorType;
+  @Input() loading!: boolean
 }

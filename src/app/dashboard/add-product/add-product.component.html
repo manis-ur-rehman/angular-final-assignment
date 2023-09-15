@@ -1,0 +1,8 @@
+<app-form-layout
+  description="Please create product"
+  title="Add Product"
+  [error]="error"
+  [loading]="loading"
+>
+  <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()"></form>
+</app-form-layout>

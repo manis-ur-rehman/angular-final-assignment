@@ -2,6 +2,7 @@
   description="Please login to continue Dashboard"
   title="Login"
   [error]="error"
+  [loading]="loading"
 >
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="mb-4">
