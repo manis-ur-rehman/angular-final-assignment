@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
-import { LoginResponse } from 'types';
+import { ErrorType, LoginResponse } from 'types';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,11 @@ import { LoginResponse } from 'types';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  loading:boolean = false;
+  error: ErrorType = {
+    statusCode: '',
+    message: ''
+  }
   loginForm!: FormGroup
   authService: AuthService = inject(AuthService);
 constructor(public loginFormBuilder: FormBuilder, private router: Router){
@@ -26,12 +30,26 @@ ngOnInit() {
 get loginFormControls(){
   return this.loginForm.controls
 }
+
+successResponse(res:LoginResponse){
+  
+}
 onSubmit(){
-  this.authService.loginUser(this.loginForm.value).subscribe((res:LoginResponse)=>{
+  this.loading = true;
+  this.error = {
+    statusCode: '',
+    message: ''
+  }
+  this.authService.loginUser(this.loginForm.value).subscribe((res: LoginResponse)=>{
+    this.loading = false;
     if(res.access_token){
       this.authService.saveUserToken('token', res.access_token);
       this.router.navigate(['./dashboard/products']);
     }
+  }, (error: ErrorType)=>{
+    this.error = error
+    this.loading = false;
+  
   })
 }
 toRegisterRoute(){

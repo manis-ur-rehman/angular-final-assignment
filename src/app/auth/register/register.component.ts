@@ -33,25 +33,6 @@ get registerFormControls(){
 return this.registerForm.controls
 }
 
-
-
-successFileResponce(data:FileUploadResponse, getRegisterForm: FormGroup){
-  getRegisterForm.patchValue({
-    avatar: data.location
-  });
-  this.loading = false;
-
-}
-
-successRegisterResponse(data: RegisterResponse, getRouter: Router){
-  this.loading = false;
-  this.router.navigate(['/login']);
-}
-errorResponse(error: ErrorType){
-  this.error = error
-  this.loading = false;
-
-}
 loadFile(event: any){
   this.loading = true;
   const reader = new FileReader();
@@ -64,13 +45,27 @@ loadFile(event: any){
       this.imageSrc = reader.result as string;
    const imageFormData = new FormData();
    imageFormData.append('file', file, file.name);
-   this.authService.uploadFile(imageFormData).subscribe((successData)=>this.successFileResponce(successData, this.registerForm), this.errorResponse); 
+   this.authService.uploadFile(imageFormData).subscribe((data:FileUploadResponse)=>{
+    this.registerForm.patchValue({
+      avatar: data.location
+    });
+    this.loading = false;
+  }, (error: ErrorType)=>{
+    this.error = error
+    this.loading = false;
+  }); 
     };
- 
+
   }
 }
 onSubmit(){
   this.loading = true;
-this.authService.registerUser(this.registerForm.value).subscribe((successData)=>this.successRegisterResponse(successData, this.router), this.errorResponse)
+this.authService.registerUser(this.registerForm.value).subscribe((data: RegisterResponse)=>{
+  this.loading = false;
+  this.router.navigate(['/login']);
+}, (error: ErrorType)=>{
+  this.error = error
+  this.loading = false;
+})
 }
 }

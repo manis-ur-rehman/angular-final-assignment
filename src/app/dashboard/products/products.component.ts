@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductionService } from 'src/app/production.service';
 
 @Component({
@@ -12,9 +13,13 @@ export class ProductsComponent implements OnInit {
   limit:number=10
 productionService: ProductionService = inject(ProductionService);
 
+constructor(private router: Router){
+
+}
+
 ngOnInit(){
 this.productionService.getAllProducts(this.offset, this.limit).subscribe(res=>{
-  this.allProductList = res
+  this.allProductList = res;
 });
 }
 getProductDataPrevious(offsetNumber: number){
@@ -36,5 +41,9 @@ getProductDataByList(offsetNumber: number){
   this.productionService.getProductByPagination(this.offset, this.limit).subscribe(res=>{
   this.allProductList = res
   })
+}
+
+navigateDetailsRoute(id: number){
+  this.router.navigate(['dashboard/details', id])
 }
 }
