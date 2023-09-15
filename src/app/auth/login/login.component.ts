@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
+import { LoginResponse } from 'types';
 
 @Component({
   selector: 'app-login',
@@ -26,9 +27,11 @@ get loginFormControls(){
   return this.loginForm.controls
 }
 onSubmit(){
-  this.authService.loginUser(this.loginForm.value).subscribe((res:any)=>{
-    this.authService.saveUserToken('token', res.access_token);
-    this.router.navigate(['./dashboard/products']);
+  this.authService.loginUser(this.loginForm.value).subscribe((res:LoginResponse)=>{
+    if(res.access_token){
+      this.authService.saveUserToken('token', res.access_token);
+      this.router.navigate(['./dashboard/products']);
+    }
   })
 }
 toRegisterRoute(){

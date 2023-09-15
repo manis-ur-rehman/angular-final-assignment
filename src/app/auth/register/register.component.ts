@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
+import { ErrorType, FileUploadResponse, RegisterRequest, RegisterResponse } from 'types';
 
 @Component({
   selector: 'app-register',
@@ -9,11 +10,16 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  loading:boolean = false;
+  error: ErrorType = {
+    statusCode: '',
+    message: ''
+  }
   imageSrc: string = '';
-  registerForm!: FormGroup;
   authService: AuthService = inject(AuthService);
-
-constructor(public registerFormBuilder: FormBuilder, private router: Router){}
+  
+  constructor(public registerFormBuilder: FormBuilder, public router: Router){}
+  registerForm!: FormGroup;
 
 ngOnInit() {
   this.registerForm = this.registerFormBuilder.group({
@@ -26,9 +32,29 @@ ngOnInit() {
 get registerFormControls(){
 return this.registerForm.controls
 }
+
+
+
+successFileResponce(data:FileUploadResponse, getRegisterForm: FormGroup){
+  getRegisterForm.patchValue({
+    avatar: data.location
+  });
+  this.loading = false;
+
+}
+
+successRegisterResponse(data: RegisterResponse, getRouter: Router){
+  this.loading = false;
+  this.router.navigate(['/login']);
+}
+errorResponse(error: ErrorType){
+  this.error = error
+  this.loading = false;
+
+}
 loadFile(event: any){
+  this.loading = true;
   const reader = new FileReader();
-    
   if(event.target.files && event.target.files.length) {
     const [file] = event.target.files;
     reader.readAsDataURL(file);
@@ -36,16 +62,15 @@ loadFile(event: any){
     reader.onload = () => {
  
       this.imageSrc = reader.result as string;
-   console.log("imagesrc: ", this.imageSrc)
-      this.registerForm.patchValue({
-        avatar: reader.result as string
-      });
- 
+   const imageFormData = new FormData();
+   imageFormData.append('file', file, file.name);
+   this.authService.uploadFile(imageFormData).subscribe((successData)=>this.successFileResponce(successData, this.registerForm), this.errorResponse); 
     };
  
   }
 }
 onSubmit(){
-
+  this.loading = true;
+this.authService.registerUser(this.registerForm.value).subscribe((successData)=>this.successRegisterResponse(successData, this.router), this.errorResponse)
 }
 }
