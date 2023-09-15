@@ -9,6 +9,7 @@ import { DetailsComponent } from './details/details.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ShareModule } from '../share/share.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductFormComponent } from './product-form/product-form.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LayoutComponent,
     SidebarComponent,
     DetailsComponent,
-    AddProductComponent
+    AddProductComponent,
+    ProductFormComponent
   ],
   imports: [
     CommonModule,

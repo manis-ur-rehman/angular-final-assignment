@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
-import { getProductResponse } from 'types';
+import { AddProductRequest, Category, ProductResponse } from 'types';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,15 @@ getProductByPagination(offset: number, limit: number){
 }
 
 getProductById(id: number){
-  return this.http.get<getProductResponse>(`${environment.apiUrl}${environment.route}${environment.version}/products/${id}`)
+  return this.http.get<ProductResponse>(`${environment.apiUrl}${environment.route}${environment.version}/products/${id}`)
+}
+
+addProduct(data: AddProductRequest){
+  return this.http.post<ProductResponse>(`${environment.apiUrl}${environment.route}${environment.version}/products`, data)
+}
+
+categoryList(){
+  return this.http.get<Array<Category>>(`${environment.apiUrl}${environment.route}${environment.version}/categories`);
 }
 
 }

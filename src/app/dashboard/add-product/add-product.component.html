@@ -4,5 +4,10 @@
   [error]="error"
   [loading]="loading"
 >
-  <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()"></form>
+  <app-product-form
+    [error]="error"
+    [loading]="loading"
+    (loadingHandler)="onLoadingChange($event)"
+    (errorHandler)="onErrorChange($event)"
+  ></app-product-form>
 </app-form-layout>

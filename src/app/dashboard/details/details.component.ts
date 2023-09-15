@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductionService } from 'src/app/production.service';
-import { ErrorType, getProductResponse } from 'types';
+import { ErrorType, ProductResponse } from 'types';
 
 @Component({
   selector: 'app-details',
@@ -10,7 +10,7 @@ import { ErrorType, getProductResponse } from 'types';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
-productItem:getProductResponse = {
+productItem:ProductResponse = {
   id: 0,
   title: "",
   price: 0,
@@ -42,7 +42,7 @@ productionService: ProductionService = inject(ProductionService);
     this.id= this._Activatedroute.snapshot.paramMap.get("id");
     if(this.id){
       this.loading = true;
-      this.productionService.getProductById(Number(this.id)).subscribe((productItem: getProductResponse)=>{
+      this.productionService.getProductById(Number(this.id)).subscribe((productItem: ProductResponse)=>{
         this.loading = false;
         this.productItem = productItem;
       }, (error: ErrorType)=>{

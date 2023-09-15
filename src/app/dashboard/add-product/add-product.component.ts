@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ErrorType } from 'types';
@@ -8,24 +8,16 @@ import { ErrorType } from 'types';
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css']
 })
-export class AddProductComponent implements OnInit {
+export class AddProductComponent{
   loading:boolean = false;
   error: ErrorType = {
     statusCode: '',
     message: ''
   }
-  addProductForm!:FormGroup;
-  constructor(public addProductFormBuilder:FormBuilder, private router:Router){
+  onLoadingChange(loadingValue: boolean){
+    this.loading = loadingValue
   }
-
-ngOnInit() {
-  this.addProductForm = this.addProductFormBuilder.group({
-    name: new FormControl<string>('', [Validators.required])
-  })
-}
-
-  onSubmit(){
-
+  onErrorChange(errorValue: ErrorType){
+    this.error = errorValue
   }
-
 }

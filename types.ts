@@ -32,7 +32,7 @@ export interface Category {
     creationAt: string,
     updatedAt: string
 }
-export interface getProductResponse {
+export interface ProductResponse {
         id: number,
         title: string,
         price: number,
@@ -42,6 +42,15 @@ export interface getProductResponse {
         updatedAt: string,
         category: Category
     }
+
+export interface AddProductRequest {
+    title: string,
+    price: number,
+    description: string,
+    categoryId: number,
+    images: Array<string>
+}
+
 export interface ErrorType {
     statusCode: string;
     message: [] | string; 

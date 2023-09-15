@@ -1,0 +1,111 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <div class="mb-4">
+    <label for="title" class="form-label">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      formControlName="title"
+      placeholder="Title"
+    />
+    <ng-container
+      *ngIf="
+        productFormControls['title'].invalid &&
+        (productFormControls['title'].dirty ||
+          productFormControls['title'].touched)
+      "
+    >
+      <span
+        *ngIf="productFormControls['title'].errors?.['required']"
+        class="text-danger"
+      >
+        Title is required
+      </span>
+    </ng-container>
+  </div>
+  <div class="mb-4">
+    <label for="price" class="form-label">Price</label>
+    <input
+      type="number"
+      class="form-control"
+      id="price"
+      formControlName="price"
+      placeholder="Price"
+    />
+    <ng-container
+      *ngIf="
+        productFormControls['price'].invalid &&
+        (productFormControls['price'].dirty ||
+          productFormControls['price'].touched)
+      "
+    >
+      <span
+        *ngIf="productFormControls['price'].errors?.['required']"
+        class="text-danger"
+      >
+        Price is required
+      </span>
+    </ng-container>
+  </div>
+  <div class="mb-4">
+    <label for="description" class="form-label">Description</label>
+    <input
+      type="text"
+      class="form-control"
+      id="description"
+      formControlName="description"
+      placeholder="Description"
+    />
+    <ng-container
+      *ngIf="
+        productFormControls['description'].invalid &&
+        (productFormControls['description'].dirty ||
+          productFormControls['description'].touched)
+      "
+    >
+      <span
+        *ngIf="productFormControls['description'].errors?.['required']"
+        class="text-danger"
+      >
+        Description is required
+      </span>
+    </ng-container>
+  </div>
+  <div class="mb-4">
+    <label class="form-label" for="categoryId">Category</label>
+    <select class="form-control" id="categoryId" formControlName="categoryId">
+      <option selected [value]="null">Select Category</option>
+      <option
+        *ngFor="let categoryItem of categoryList"
+        [value]="categoryItem.id"
+      >
+        {{ categoryItem.name }}
+      </option>
+      <!-- <option> *ngFor="let categoryItem of categoryList" [value]={{categoryItem.name}}>{{ categoryItem.id }}</option> -->
+      <!-- <option [value]="categoryItem.id">{{ categoryItem.name }}</option> -->
+    </select>
+    <ng-container
+      *ngIf="
+        productFormControls['categoryId'].invalid &&
+        (productFormControls['categoryId'].dirty ||
+          productFormControls['categoryId'].touched)
+      "
+    >
+      <span
+        *ngIf="productFormControls['categoryId'].errors?.['required']"
+        class="text-danger"
+      >
+        Category is required
+      </span>
+    </ng-container>
+  </div>
+  <div class="d-grid">
+    <button
+      type="submit"
+      class="btn text-light bg-primary rounded"
+      [disabled]="productForm.invalid || loading"
+    >
+      Add Product
+    </button>
+  </div>
+</form>
