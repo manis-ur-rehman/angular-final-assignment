@@ -1,6 +1,6 @@
 <app-form-layout
-  description="Please create product"
-  title="Add Product"
+  description="Please edit your product"
+  title="Edit Product"
   [error]="error"
   [loading]="loading"
 >
@@ -9,6 +9,6 @@
     [loading]="loading"
     (loadingHandler)="onLoadingChange($event)"
     (errorHandler)="onErrorChange($event)"
-    [isEdit]="false"
+    [isEdit]="true"
   ></app-product-form>
 </app-form-layout>

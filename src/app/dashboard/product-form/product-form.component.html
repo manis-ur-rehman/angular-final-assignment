@@ -81,8 +81,6 @@
       >
         {{ categoryItem.name }}
       </option>
-      <!-- <option> *ngFor="let categoryItem of categoryList" [value]={{categoryItem.name}}>{{ categoryItem.id }}</option> -->
-      <!-- <option [value]="categoryItem.id">{{ categoryItem.name }}</option> -->
     </select>
     <ng-container
       *ngIf="
@@ -105,7 +103,7 @@
       class="btn text-light bg-primary rounded"
       [disabled]="productForm.invalid || loading"
     >
-      Add Product
+      {{ id && isEdit ? "Update Product" : "Add Product" }}
     </button>
   </div>
 </form>

@@ -46,6 +46,9 @@ getProductDataByList(offsetNumber: number){
 navigateDetailsRoute(id: number){
   this.router.navigate(['dashboard/details', id])
 }
+navigateEditRoute(id: number){
+  this.router.navigate(['dashboard/edit-product', id])
+}
 navigateToAddProduct(){
   this.router.navigate(['dashboard/add-product'])
 }

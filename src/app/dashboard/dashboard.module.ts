@@ -10,6 +10,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { ShareModule } from '../share/share.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductFormComponent } from './product-form/product-form.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ProductFormComponent } from './product-form/product-form.component';
     SidebarComponent,
     DetailsComponent,
     AddProductComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    EditProductComponent
   ],
   imports: [
     CommonModule,

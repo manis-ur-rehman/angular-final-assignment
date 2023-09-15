@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { ErrorType } from 'types';
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.css']
+  selector: 'app-edit-product',
+  templateUrl: './edit-product.component.html',
+  styleUrls: ['./edit-product.component.css']
 })
-export class AddProductComponent{
+export class EditProductComponent {
   loading:boolean = false;
   error: ErrorType = {
     statusCode: '',

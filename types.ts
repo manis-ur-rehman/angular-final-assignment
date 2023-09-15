@@ -42,13 +42,14 @@ export interface ProductResponse {
         updatedAt: string,
         category: Category
     }
-
-export interface AddProductRequest {
+export interface editProductRequest {
     title: string,
     price: number,
+    images: Array<string>
+}
+export interface AddProductRequest extends editProductRequest {
     description: string,
     categoryId: number,
-    images: Array<string>
 }
 
 export interface ErrorType {
