@@ -5,6 +5,9 @@
         Add Product
       </button>
     </div>
+    <div class="text-center">
+      <div *ngIf="loading" class="spinner-border" role="status"></div>
+    </div>
     <div class="card-group" *ngFor="let item of allProductList">
       <div class="card bg-transparent" style="width: 25rem">
         <div class="row">

@@ -6,3 +6,4 @@
   main {
     padding-top: 90px;
   }
+  li { cursor: pointer; }
